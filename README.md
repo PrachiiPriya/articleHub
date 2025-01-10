@@ -1,7 +1,7 @@
-articleHub
+articleHub :
 articleHub is a modern React-based web application for displaying articles with various features such as routing, state management with Redux, and integration with external data sources.
 
-Features
+Features: 
 React for the frontend UI.
 React Router for routing between pages.
 Redux for global state management.
@@ -45,10 +45,10 @@ Copy code
 npm start
 This will run the React app on http://localhost:3000 in your browser.
 
-5. Access the Application
+5. Access the Application:
 Open your browser and visit http://localhost:3000 to see the application in action.
 
-Folder Structure
+Folder Structure:
 Here is a brief explanation of the folder structure:
 
 php
