@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+articleHub
+articleHub is a modern React-based web application for displaying articles with various features such as routing, state management with Redux, and integration with external data sources.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+React for the frontend UI.
+React Router for routing between pages.
+Redux for global state management.
+Styled Components for component-level styling.
+Axios for making HTTP requests.
+Prerequisites
+Before you begin, ensure that you have the following installed:
 
-## Available Scripts
+Node.js: A JavaScript runtime environment that allows you to run JavaScript outside the browser. Download Node.js
+npm: Node's package manager, usually comes with Node.js. Download npm
+Setup Instructions
+Follow these steps to set up the project on your local machine.
 
-In the project directory, you can run:
+1. Clone the Repository
+First, clone the repository from GitHub to your local machine:
 
-### `npm start`
+bash
+Copy code
+git clone https://github.com/YourGitHubUsername/articleHub.git
+Replace YourGitHubUsername with your actual GitHub username.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Navigate to the Project Directory
+After cloning, navigate into the articleHub directory:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+bash
+Copy code
+cd articleHub
+3. Install Dependencies
+Install all the required dependencies for the project:
 
-### `npm test`
+bash
+Copy code
+npm install
+This will install all the dependencies listed in the package.json file, including React, Redux, Axios, and others.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. Start the Development Server
+Once the dependencies are installed, you can start the development server:
 
-### `npm run build`
+bash
+Copy code
+npm start
+This will run the React app on http://localhost:3000 in your browser.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. Access the Application
+Open your browser and visit http://localhost:3000 to see the application in action.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Folder Structure
+Here is a brief explanation of the folder structure:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+php
+Copy code
+articleHub/
+├── client/                     # Contains all React-related code
+│   ├── public/                 # Static files like images and icons
+│   ├── src/                    # All source code
+│   │   ├── components/         # React components for various pages and UI elements
+│   │   ├── redux/              # Redux store and slice for global state management
+│   │   ├── App.js              # Main React component for routing
+│   │   └── index.js            # Entry point for React app
+├── .gitignore                  # Specifies which files and directories to ignore in Git
+├── package.json                # Project dependencies and scripts
+└── README.md                   # Project documentation (this file)
+Project Components
+App.js: The root component that renders other pages and components.
+Redux: Used for state management. Stores article data and other global states.
+Components: Each React component is located here, such as the article card, article pages, etc.
+Public folder: Contains static files such as index.html, images, etc.
+Scripts
+npm start: Starts the development server and opens the application in your default browser.
+npm run build: Bundles the app for production, optimizing the build for better performance.
+npm test: Runs tests if any are present in the project.
+npm run eject: Removes the create-react-app configuration and gives full control over the build configuration.
+Contributing
+If you'd like to contribute to the project:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Fork the repository.
+Create your branch (git checkout -b feature-name).
+Make your changes.
+Commit your changes (git commit -am 'Add new feature').
+Push to your branch (git push origin feature-name).
+Create a new Pull Request.
