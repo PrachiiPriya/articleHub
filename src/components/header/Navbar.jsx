@@ -75,9 +75,9 @@ function Navbar() {
       </NavLinks>
 
       {/* Action buttons */}
-      <Actions>
+      {/* <Actions>
         <Button>Login</Button>
-      </Actions>
+      </Actions> */}
     </NavbarContainer>
   );
 }

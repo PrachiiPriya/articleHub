@@ -17,7 +17,7 @@ function App() {
         <Route path="/editor" element={<EditorPage />} />
         <Route path="/bookmarks" element={<BookmarkPage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

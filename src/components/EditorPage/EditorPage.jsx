@@ -1,91 +1,110 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createArticle } from '../../redux/articlesSlice'; // Import the createArticle action
+import { createArticle } from '../../redux/articlesSlice';
 import { useNavigate } from 'react-router-dom';
-import { fetchArticles } from '../../redux/articlesSlice'; // Import fetchArticles to refresh the list
+import styles from './editorPage.module.css';
 
 const EditorPage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
   const [categories, setCategories] = useState({
     technology: false,
     science: false,
     health: false,
   });
+  const [error, setError] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Function to calculate reading time based on word count
   const calculateReadingTime = (text) => {
     const words = text.trim().split(/\s+/).length;
-    return Math.ceil(words / 200); // Assume 200 words per minute
+    return Math.ceil(words / 200); // Assuming 200 words per minute
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
+    // Validate form data before submitting
+    if (!title || !content || !thumbnail || !Object.values(categories).includes(true)) {
+      setError("Please fill out all required fields, including selecting at least one category.");
+      return;
+    }
+  
+    // Create the new article object
     const newArticle = {
       title,
       content,
+      thumbnail,
       readingTime: calculateReadingTime(content),
       lastEdited: new Date().toISOString(),
-      categories: Object.keys(categories).filter((key) => categories[key]),
+      category: Object.keys(categories).filter((key) => categories[key]),
     };
+  
+    console.log('Creating Article with Data:', newArticle); // Debug log
+  
+    dispatch(createArticle(newArticle))
+      .then(() => {
+        console.log('Article created successfully. Navigating to homepage...');
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error("Error creating article:", error);
+        setError("An error occurred while creating the article.");
+      });
+  };  
 
-    console.log('New Article Data:', newArticle);
-
-    // Dispatch action to save the article
-    dispatch(createArticle(newArticle)).then(() => {
-      // After article creation, refresh the articles list
-      dispatch(fetchArticles());
-      // Navigate back to the homepage or article list
-      navigate('/');
-    });
-  };
-
-  // Handle category selection
   const handleCategoryChange = (e) => {
     const { name, checked } = e.target;
     setCategories((prev) => ({ ...prev, [name]: checked }));
   };
 
   return (
-    <div style={styles.container}>
+    <div className={styles.container}>
       <h1>Create New Article</h1>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        {/* Title Input */}
-        <div style={styles.formGroup}>
+      {error && <p className={styles.error}>{error}</p>}
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>
           <input
             type="text"
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            style={styles.input}
+            className={styles.input}
             required
           />
         </div>
 
-        {/* Content Input */}
-        <div style={styles.formGroup}>
+        <div className={styles.formGroup}>
+          <label htmlFor="thumbnail">Thumbnail URL:</label>
+          <input
+            type="url"
+            id="thumbnail"
+            value={thumbnail}
+            onChange={(e) => setThumbnail(e.target.value)}
+            className={styles.input}
+            required
+          />
+        </div>
+
+        <div className={styles.formGroup}>
           <label htmlFor="content">Content:</label>
           <textarea
             id="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            style={styles.textarea}
+            className={styles.textarea}
             required
           />
         </div>
 
-        {/* Categories */}
-        <div style={styles.formGroup}>
+        <div className={styles.formGroup}>
           <label>Categories:</label>
           <div>
             {Object.keys(categories).map((category) => (
-              <label key={category} style={styles.checkboxLabel}>
+              <label key={category} className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
                   name={category}
@@ -98,61 +117,12 @@ const EditorPage = () => {
           </div>
         </div>
 
-        {/* Submit Button */}
-        <button type="submit" style={styles.submitButton}>
+        <button type="submit" className={styles.submitButton}>
           Create Article
         </button>
       </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    padding: '20px',
-    maxWidth: '800px',
-    margin: '0 auto',
-    fontFamily: 'Arial, sans-serif',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '15px',
-  },
-  formGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    padding: '8px',
-    fontSize: '16px',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-    marginTop: '5px',
-  },
-  textarea: {
-    padding: '8px',
-    fontSize: '16px',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-    height: '150px',
-    resize: 'vertical',
-    marginTop: '5px',
-  },
-  checkboxLabel: {
-    display: 'block',
-    marginTop: '5px',
-  },
-  submitButton: {
-    padding: '10px 20px',
-    backgroundColor: '#4CAF50',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontSize: '16px',
-    textAlign: 'center',
-  },
 };
 
 export default EditorPage;
